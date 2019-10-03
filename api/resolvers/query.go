@@ -10,12 +10,12 @@ type QueryResolver struct {
 func (QueryResolver) Hello() string { return "Hello, world!1234" }
 
 func (QueryResolver) Comment() CommentResolver {
-	comment := models.Comment{
+	c := models.Comment{
 		ID:      123,
 		Content: "Hll",
 	}
 
-	return ToCommentResolver(comment)
+	return ToCommentResolver(c)
 }
 
 func (QueryResolver) Comments() []CommentResolver {
@@ -36,4 +36,13 @@ func (QueryResolver) Comments() []CommentResolver {
 	comments = append(comments, comment)
 
 	return ToCommentResolverArray(comments)
+}
+
+func (QueryResolver) Article() ArticleResolver {
+	a := models.Article{
+		ID:    1,
+		Title: "Article 1",
+	}
+
+	return ToArticleResolver(a)
 }

@@ -6,6 +6,12 @@ type Query {
 	hello: String!
 	comment: Comment!
 	comments: [Comment!]!
+	article: Article!
+}
+
+type Article {
+	id: Int!
+	title: String!
 }
 
 type Comment {
