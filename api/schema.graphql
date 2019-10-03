@@ -1,6 +1,14 @@
 schema {
 	query: Query
 }
+
 type Query {
 	hello: String!
+	comment: Comment!
+	comments: [Comment!]!
+}
+
+type Comment {
+	id: Int!
+	content: String!
 }

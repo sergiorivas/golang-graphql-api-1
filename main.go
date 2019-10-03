@@ -12,7 +12,7 @@ import (
 
 func main() {
 	s, _ := api.GetSchema("./api/schema.graphql")
-	schema := graphql.MustParseSchema(s, &resolvers.RootResolver{})
+	schema := graphql.MustParseSchema(s, &resolvers.QueryResolver{})
 	http.Handle("/query", &relay.Handler{Schema: schema})
 	log.Fatal(http.ListenAndServe(":3001", nil))
 }
