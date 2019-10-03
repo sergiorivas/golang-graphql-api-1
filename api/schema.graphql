@@ -12,6 +12,7 @@ type Query {
 type Article {
 	id: Int!
 	title: String!
+	comment: Comment
 }
 
 type Comment {

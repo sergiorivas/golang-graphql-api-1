@@ -12,6 +12,12 @@ func (r ArticleResolver) ID() int32 { return r.Obj.ID }
 
 func (r ArticleResolver) Title() string { return r.Obj.Title }
 
+func (r ArticleResolver) Comment() *CommentResolver {
+	return &CommentResolver{
+		Obj: r.Obj.Comment,
+	}
+}
+
 func ToArticleResolver(o models.Article) ArticleResolver {
 	return ArticleResolver{
 		Obj: o,

@@ -42,6 +42,10 @@ func (QueryResolver) Article() ArticleResolver {
 	a := models.Article{
 		ID:    1,
 		Title: "Article 1",
+		Comment: models.Comment{
+			ID:      2,
+			Content: "zxc",
+		},
 	}
 
 	return ToArticleResolver(a)
