@@ -15,6 +15,8 @@ import (
 func main() {
 
 	db, err := gorm.Open("postgres", "host=127.0.0.1 port=5432 user=srivas dbname=test sslmode=disable password=")
+	db.LogMode(true) //For debugging
+
 	if err != nil {
 		panic(err)
 	}
