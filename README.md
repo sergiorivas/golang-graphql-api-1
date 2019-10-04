@@ -28,17 +28,12 @@ Open `http://localhost:3000` for the playground
 
 ### Pending
 
-1. Basic Graphql for One Comment
-2. Basic Graphql for un Article with comments
-3. Bind Database
+1. Args
+2. Mutation
 3. Database migration
 4. Database seeds
-4. Add Comments Migration
-5. Add Comment Migration
-6. Add Comment Resolver
-7. Add dataloader
-8.  Add mutation
-9.  Clean the project
+5. Add dataloader
+6.  Clean the project
 
 ### Done
 
