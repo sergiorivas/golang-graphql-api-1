@@ -1,12 +1,14 @@
 schema {
 	query: Query
+	mutation: Mutation
 }
 
 type Query {
 	hello: String!
-	comment: Comment!
+	firstComment: Comment!
 	comments: [Comment!]!
-	article: Article!
+	articles: [Article!]!
+	article(id: Int!): Article!
 }
 
 type Article {
@@ -18,4 +20,8 @@ type Article {
 type Comment {
 	id: Int!
 	content: String!
+}
+
+type Mutation {
+	updateTitle(id: Int!, title: String!): Boolean!
 }

@@ -44,7 +44,7 @@ func main() {
 		panic(err)
 	}
 
-	rootResolver := resolvers.QueryResolver{DB: db}
+	rootResolver := resolvers.RootResolver{DB: db}
 	schema := graphql.MustParseSchema(s, &rootResolver)
 	http.Handle("/graphql", &relay.Handler{Schema: schema})
 	log.Fatal(http.ListenAndServe(":3001", nil))

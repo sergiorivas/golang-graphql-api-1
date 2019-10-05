@@ -1,34 +1,32 @@
 package resolvers
 
 import (
+	"context"
 	"test_articles/models"
-
-	"github.com/jinzhu/gorm"
 )
 
-type QueryResolver struct {
-	DB *gorm.DB
-}
+func (RootResolver) Hello() string { return "Hello, world!1234" }
 
-func (QueryResolver) Hello() string { return "Hello, world!1234" }
-
-func (q QueryResolver) Comment() CommentResolver {
+func (q RootResolver) FirstComment() CommentResolver {
 	var c models.Comment
 	q.DB.First(&c)
 	return ToCommentResolver(c, q.DB)
 }
 
-func (q QueryResolver) Comments() []CommentResolver {
-
+func (q RootResolver) Comments() []CommentResolver {
 	var comments []models.Comment
-
 	q.DB.Find(&comments)
-
 	return ToCommentResolverArray(comments, q.DB)
 }
 
-func (q QueryResolver) Article() ArticleResolver {
+func (q RootResolver) Article(ctx context.Context, args struct{ ID int32 }) ArticleResolver {
 	var a models.Article
-	q.DB.First(&a)
+	q.DB.First(&a, args.ID)
 	return ToArticleResolver(a, q.DB)
+}
+
+func (q RootResolver) Articles() []ArticleResolver {
+	var articles []models.Article
+	q.DB.Find(&articles)
+	return ToArticleResolverArray(articles, q.DB)
 }
