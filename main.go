@@ -22,6 +22,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
 	connectionString := fmt.Sprintf(
 		"host=%s port=%s user=%s dbname=%s sslmode=disable password=%s",
 		os.Getenv("DB_HOST"),
@@ -31,13 +32,12 @@ func main() {
 		os.Getenv("DB_PASSWORD"),
 	)
 	db, err := gorm.Open("postgres", connectionString)
-	defer db.Close()
-
-	db.LogMode(!(os.Getenv("PRODUCTIO") != "" && os.Getenv("PRODUCTION") == "TRUE")) //For debugging
-
 	if err != nil {
 		panic(err)
 	}
+	defer db.Close()
+
+	db.LogMode(!(os.Getenv("PRODUCTIO") != "" && os.Getenv("PRODUCTION") == "TRUE")) //For debugging
 
 	s, err := api.GetSchema("./api/schema.graphql")
 	if err != nil {
