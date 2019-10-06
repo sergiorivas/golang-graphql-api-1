@@ -8,6 +8,8 @@ gin
 
 sql-migrate
 
+dep
+
 ## Config
 
 ```
