@@ -69,5 +69,5 @@ func main() {
 
 	r := gin.New()
 	r.POST("/graphql", graphQLHandler(&relay.Handler{Schema: schema}))
-	r.Run("0.0.0.0:3001")
+	r.Run(":3001")
 }
