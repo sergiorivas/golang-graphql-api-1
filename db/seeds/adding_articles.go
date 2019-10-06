@@ -39,10 +39,10 @@ func main() {
 
 	var db *gorm.DB
 	db = connectToDB()
+	db.LogMode(!(os.Getenv("PRODUCTIO") != "" && os.Getenv("PRODUCTION") == "TRUE")) //For debugging
 	populate(db)
 	defer db.Close()
 
-	db.LogMode(!(os.Getenv("PRODUCTIO") != "" && os.Getenv("PRODUCTION") == "TRUE")) //For debugging
 }
 
 func populate(db *gorm.DB) {
