@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 	"os"
 	"test_articles/api"
 	"test_articles/api/resolvers"
 
 	"github.com/joho/godotenv"
 
+	"github.com/gin-gonic/gin"
 	graphql "github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
 	"github.com/jinzhu/gorm"
@@ -48,6 +48,12 @@ func loadSchema() string {
 	return s
 }
 
+func graphQLHandler(r *relay.Handler) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		r.ServeHTTP(c.Writer, c.Request)
+	}
+}
+
 func main() {
 	loadEnv()
 
@@ -55,12 +61,13 @@ func main() {
 	db = connectToDB()
 	defer db.Close()
 
-	db.LogMode(!(os.Getenv("PRODUCTIO") != "" && os.Getenv("PRODUCTION") == "TRUE")) //For debugging
+	db.LogMode(!(os.Getenv("PRODUCTION") != "" && os.Getenv("PRODUCTION") == "TRUE")) //For debugging
 
 	// Preparing schema
 	rootResolver := resolvers.RootResolver{DB: db}
 	schema := graphql.MustParseSchema(loadSchema(), &rootResolver)
 
-	http.Handle("/graphql", &relay.Handler{Schema: schema})
-	log.Fatal(http.ListenAndServe(":3001", nil))
+	r := gin.New()
+	r.POST("/graphql", graphQLHandler(&relay.Handler{Schema: schema}))
+	r.Run("0.0.0.0:3001")
 }
