@@ -40,15 +40,3 @@ Rollback
 ```
 sql-migrate down -config="config/sql-migrate.yml"
 ```
-
----
-
-### Pending
-
-1. Database migration
-2. Database seeds
-
-### Done
-
-
-
