@@ -65,10 +65,11 @@ func main() {
 	db.LogMode(!(os.Getenv("PRODUCTION") != "" && os.Getenv("PRODUCTION") == "TRUE")) //For debugging
 
 	// Preparing schema
-	rootResolver := resolvers.RootResolver{DB: db}
+	rootResolver := resolvers.RootResolver{}
 	schema := graphql.MustParseSchema(loadSchema(), &rootResolver)
 
 	r := gin.New()
+	r.Use(middleware.AddDatabase(db))
 	r.Use(middleware.GinContextToContextMiddleware())
 	r.Use(middleware.AddUser())
 	r.POST("/graphql", graphQLHandler(&relay.Handler{Schema: schema}))

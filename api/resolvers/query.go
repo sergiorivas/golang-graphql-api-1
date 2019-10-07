@@ -3,34 +3,39 @@ package resolvers
 import (
 	"context"
 	"errors"
+	"test_articles/middleware"
 	"test_articles/models"
 )
 
 func (RootResolver) Hello() string { return "Hello, world!1234" }
 
-func (q RootResolver) FirstComment() CommentResolver {
+func (RootResolver) FirstComment(ctx context.Context) (CommentResolver, error) {
+	db := middleware.GetConnection(ctx)
 	var c models.Comment
-	q.DB.First(&c)
-	return ToCommentResolver(c, q.DB)
+	db.First(&c)
+	return ToCommentResolver(c), nil
 }
 
-func (q RootResolver) Comments() []CommentResolver {
+func (RootResolver) Comments(ctx context.Context) ([]CommentResolver, error) {
+	db := middleware.GetConnection(ctx)
 	var comments []models.Comment
-	q.DB.Find(&comments)
-	return ToCommentResolverArray(comments, q.DB)
+	db.Find(&comments)
+	return ToCommentResolverArray(comments), nil
 }
 
-func (q RootResolver) Article(ctx context.Context, args struct{ ID int32 }) (ArticleResolver, error) {
+func (RootResolver) Article(ctx context.Context, args struct{ ID int32 }) (ArticleResolver, error) {
+	db := middleware.GetConnection(ctx)
 	var a models.Article
-	q.DB.First(&a, args.ID)
+	db.First(&a, args.ID)
 	if a.ID == 0 {
 		return ArticleResolver{}, errors.New("ID not found")
 	}
-	return ToArticleResolver(a, q.DB), nil
+	return ToArticleResolver(a), nil
 }
 
-func (q RootResolver) Articles() []ArticleResolver {
+func (RootResolver) Articles(ctx context.Context) ([]ArticleResolver, error) {
+	db := middleware.GetConnection(ctx)
 	var articles []models.Article
-	q.DB.Find(&articles)
-	return ToArticleResolverArray(articles, q.DB)
+	db.Find(&articles)
+	return ToArticleResolverArray(articles), nil
 }

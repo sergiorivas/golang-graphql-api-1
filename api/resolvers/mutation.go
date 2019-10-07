@@ -2,6 +2,7 @@ package resolvers
 
 import (
 	"context"
+	"test_articles/middleware"
 	"test_articles/models"
 )
 
@@ -10,11 +11,11 @@ type updateTitleArgs struct {
 	Title string
 }
 
-func (q RootResolver) UpdateTitle(ctx context.Context, args updateTitleArgs) bool {
+func (RootResolver) UpdateTitle(ctx context.Context, args updateTitleArgs) (bool, error) {
+	db := middleware.GetConnection(ctx)
 	var article models.Article
-	q.DB.Find(&article, args.ID)
+	db.Find(&article, args.ID)
 	article.Title = args.Title
-	q.DB.Save(&article)
-
-	return true
+	db.Save(&article)
+	return true, nil
 }
