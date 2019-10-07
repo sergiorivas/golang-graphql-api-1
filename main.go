@@ -6,6 +6,7 @@ import (
 	"os"
 	"test_articles/api"
 	"test_articles/api/resolvers"
+	"test_articles/middleware"
 
 	"github.com/joho/godotenv"
 
@@ -68,6 +69,9 @@ func main() {
 	schema := graphql.MustParseSchema(loadSchema(), &rootResolver)
 
 	r := gin.New()
+	r.Use(middleware.GinContextToContextMiddleware())
+	r.Use(middleware.AddUser())
 	r.POST("/graphql", graphQLHandler(&relay.Handler{Schema: schema}))
+
 	r.Run(":3001")
 }
