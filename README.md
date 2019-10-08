@@ -2,13 +2,34 @@
 
 ## Install
 
-Config bin
+You can install `asdf` if you are in linux, this allow you to have several dev envs including GOLANG
 
-gin
+### 1. Config go path and bin
+Add in your `~/.bashrc` or `~/.zshrc`
 
-sql-migrate
+```
+export GOPATH=$HOME/go
+export PATH="$PATH:$GOPATH/bin"
+```
 
-dep
+---
+
+Now, you have to install some commands (2. ,3. ,4.)
+
+### 2. Gin (Server with hot-reload)
+```
+go get github.com/codegangsta/gin
+```
+
+### 3. SQL-Migrate (for migrations)
+```
+go get -v github.com/rubenv/sql-migrate/...
+```
+
+### 4. Dep (Dependecy manager)
+```
+go get -u github.com/golang/dep/cmd/dep
+```
 
 ## Config
 
