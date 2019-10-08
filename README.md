@@ -1,6 +1,6 @@
 # Install
 
-You can install `asdf` if you are in linux, this allow you to have several dev envs including GOLANG
+You can install `asdf` if you are in linux or MacOS, this allow you to have several dev envs including GOLANG
 
 ### 1. Config go path and bin
 Add in your `~/.bashrc` or `~/.zshrc`
