@@ -31,7 +31,15 @@ go get -v github.com/rubenv/sql-migrate/...
 go get -u github.com/golang/dep/cmd/dep
 ```
 
-## Config
+---
+
+## 5. Copy .env file
+```
+cp .env-example .env
+```
+
+And change your configuration
+
 
 ```
 export `egrep -v "#" .env | xargs -0`
