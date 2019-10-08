@@ -1,6 +1,4 @@
-# Test
-
-## Install
+# Install
 
 You can install `asdf` if you are in linux, this allow you to have several dev envs including GOLANG
 
@@ -33,29 +31,45 @@ go get -u github.com/golang/dep/cmd/dep
 
 ---
 
-## 5. Copy .env file
+### 5. Copy .env file
 ```
 cp .env-example .env
 ```
 
-And change your configuration
+And change your **configuration values**
 
+# Initial Run (preparing database)
+
+### 1. Run initial migrations
+
+```
+export `egrep -v "#" .env | xargs -0`
+sql-migrate up -config="config/sql-migrate.yml"
+```
+
+### 2. Run seeds
+```
+go run db/seeds/adding_articles.go
+```
+
+# Regular Run
+
+### Start the server
+```
+gin
+```
+
+The API should be at `http://localhost:3000/graphql`
+
+# Migrations
+
+Run this at least once in your console
 
 ```
 export `egrep -v "#" .env | xargs -0`
 ```
 
-## Initial Run
-
-## Regular Run
-
-```
-gin
-```
-
-Open `http://localhost:3000` for the playground
-
-## Migrations
+----
 
 Creating a migration
 ```
