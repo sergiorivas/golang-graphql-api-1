@@ -11,6 +11,10 @@ type Query {
 	article(id: Int!): Article!
 }
 
+type Mutation {
+	updateTitle(id: Int!, title: String!): Boolean!
+}
+
 type Article {
 	id: Int!
 	title: String!
@@ -22,6 +26,3 @@ type Comment {
 	content: String!
 }
 
-type Mutation {
-	updateTitle(id: Int!, title: String!): Boolean!
-}
