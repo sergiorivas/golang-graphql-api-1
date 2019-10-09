@@ -70,7 +70,7 @@ func main() {
 
 	r := gin.New()
 	r.Use(middleware.AddDatabase(db))
-	r.Use(middleware.AddDatabaseGinContext())
+	r.Use(middleware.AddDGinContext())
 	r.Use(middleware.AddUser())
 	r.POST("/graphql", graphQLHandler(&relay.Handler{Schema: schema}))
 	r.Static("/", "./static/graphiql")
