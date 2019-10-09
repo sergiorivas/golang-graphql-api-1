@@ -40,14 +40,20 @@ And change your **configuration values**
 
 # Initial Run (preparing database)
 
-### 1. Run initial migrations
+### 1. Get depencies
+
+```
+dep ensure
+```
+
+### 2. Run initial migrations
 
 ```
 export `egrep -v "#" .env | xargs -0`
 sql-migrate up -config="config/sql-migrate.yml"
 ```
 
-### 2. Run seeds
+### 3. Run seeds
 ```
 go run db/seeds/adding_articles.go
 ```

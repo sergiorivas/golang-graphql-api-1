@@ -73,6 +73,7 @@ func main() {
 	r.Use(middleware.AddDatabaseGinContext())
 	r.Use(middleware.AddUser())
 	r.POST("/graphql", graphQLHandler(&relay.Handler{Schema: schema}))
+	r.Static("/", "./static/graphiql")
 
 	r.Run(":3001")
 }
