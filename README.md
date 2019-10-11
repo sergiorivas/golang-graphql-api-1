@@ -19,6 +19,15 @@ export GOPATH=$HOME/go
 export PATH="$PATH:$GOPATH/bin"
 ```
 
+## APP Folder
+
+This project should be at `$GOPATH/src` it means `~/go/src`
+
+And the name should be `test_articles`, please rename it!
+
+So the final code should be at `~/go/src/test_articles`
+
+
 ---
 
 Now, you have to install some commands (2. ,3. ,4.)
