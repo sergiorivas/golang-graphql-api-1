@@ -1,7 +1,7 @@
 This a template for an GraphQL API in Golang with
 
 - [Gin Server](https://github.com/gin-gonic/gin): Fast server
-- [Graphql go (Gohpers)](https://github.com/graph-gophers/graphql-go): GraphQL Engine
+- [Graphql-Go (Gophers)](https://github.com/graph-gophers/graphql-go): GraphQL Engine
 - [Gorm](https://gorm.io/docs/): ORM in GO (connected with postgreSQL)
 - [GraphiQL](https://github.com/graphql/graphiql): GraphQL web client
 - [SQL-Migrate](https://github.com/rubenv/sql-migrate): DB migrations
